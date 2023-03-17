@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettagli corso</title>
+</head>
+<body>
+    <h1>Dettagli Corso</h1>
+    <p th:text="${course.id}">000</p>
+    <p th:text="${course.title}">Java for Dummies</p>
+    <p th:text="${course.description}">Introduction to Java</p>
+    <p th:text="${course.createdAt}">2022/06/12</p>
+    <p th:text="${course.isActive}">true</p>
+</body>
+</html>
