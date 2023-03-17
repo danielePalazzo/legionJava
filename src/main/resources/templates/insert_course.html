@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista dei Corsi</title>
+</head>
+<body>
+
+  <form action="saveCourse" method="get" th:object="${course}">
+    <label for="title">Titolo del corso</label>
+    <input type="text" name="title" id="title" th:field="*{title}"><br>
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+    <label for="description">Descrizione del corso</label>
+    <input type="text" name="description" id="description"><br>
+    <label for="program">Programma del corso</label>
+    <input type="text" name="program" id="program"><br>
+    <label for="duration">Durata del corso</label>
+    <input type="text" name="duration" id="duration"><br>
+    <label for="active">Il corso è attivo?</label>
+    <input type="checkbox" name="active" id="active"><br>
+    <label for="createdAt">specifica una data diversa da oggi se desiderate</label>
+    <input type="date" name="createdAt" id="createdAt"><br>
+    <button>Crea il corso</button>
+    <input type="reset" value="Reimposta tutto">
+  </form>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package org.generation.italy.legion.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,13 +16,15 @@ public class Course implements Serializable {
     @SequenceGenerator(name = "course_generator", sequenceName = "course_sequence", allocationSize = 1)
     @Column(name = "id_course")   //nome colonna lato DB
     private long id;
+    @NotBlank(message = "il corso deve specificare un titolo")
     private String title;
     private String description;
     private String program;
+    //@NotBlank(message = "la durata è obbligatoria") da rivedere
     private double duration;
     //private static final long serialVersionUID = 1;
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean active;
     @Column(name = "created_at")
     private LocalDate createdAt;
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
@@ -34,13 +37,13 @@ public class Course implements Serializable {
         this(id, title, description, program, duration, true, createdAt);
     }
 
-    public Course(long id, String title, String description, String program, double duration,boolean isActive, LocalDate createdAt) {
+    public Course(long id, String title, String description, String program, double duration, boolean active, LocalDate createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.program = program;
         this.duration = duration;
-        this.isActive = isActive;
+        this.active = active;
         this.createdAt = createdAt;
     }
 
@@ -76,17 +79,36 @@ public class Course implements Serializable {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProgram(String program) {
+        this.program = program;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
     public boolean deactivate(){
-        boolean wasActive = isActive;
-        isActive = false;
-        return isActive!= wasActive;
+        boolean wasActive = active;
+        active = false;
+        return active != wasActive;
     }
     public void setEditions(List<CourseEdition> editions) {
         this.editions = editions;
@@ -104,7 +126,7 @@ public class Course implements Serializable {
 //                '}';
 //        ritorna la stessa cosa, anzi è fatta meglio
         return String.format("Course{id=%d, title=%s, description=%s, program=%s, duration=%f, isActive = %b, createdAt = %s}",
-                id,title,description,program,duration, isActive, createdAt);
+                id,title,description,program,duration, active, createdAt);
     }
 
     @Override
