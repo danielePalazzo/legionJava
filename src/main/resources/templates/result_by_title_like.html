@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista dei Corsi</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id Corso</th>
+                <th>Titolo</th>
+                <th>Descrizione</th>
+                <th>Programma</th>
+                <th>Durata</th>
+                <th>È attivo?</th>
+                <th>Data creazione</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c : ${courses}">
+                <td th:text="${c.id}">0000</td>
+                <td th:text="${c.title}">Titlo del corso</td>
+                <td th:text="${c.description}">Descrizione del corso</td>
+                <td th:text="${c.program}">Programma del corso</td>
+                <td th:text="${c.duration}">Durata del corso</td>
+                <td th:text="${c.isActive}">true/false</td>
+                <td th:text="${c.createdAt}">aaaa/mm/gg</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

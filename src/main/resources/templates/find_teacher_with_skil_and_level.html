@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista dei Corsi</title>
+</head>
+<body>
+
+  <form action="findByTitleLike" method="get">
+    <label for="id">Inserisci l'id della skill da ricercare</label>
+    <input type="number" name="id" id="id"><br>
+    <p>Inserisci il livello della competenza<p><br>
+    <input type="radio" name="level" id="base" value="BASE">
+    <label for="base">BASE</label><br>
+    <input type="radio" name="level" id="intermediate" value="INTERMEDIATE">
+    <label for="intermediate">INTERMEDIATE</label><br>
+    <input type="radio" name="level" id="advenced" value="ADVANCED">
+    <label for="advenced">ADVANCED</label><br>
+    <input type="radio" name="level" id="guru" value="GURU">
+    <label for="guru">GURU</label><br>
+    <button>Cerca il docente</button>
+  </form>
+
+</body>
+</html>

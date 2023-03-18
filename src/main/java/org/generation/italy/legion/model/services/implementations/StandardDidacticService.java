@@ -7,6 +7,7 @@ import org.generation.italy.legion.model.entities.Course;
 import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,7 @@ public class StandardDidacticService implements AbstractDidacticService {
     }
 
     @Override
+    @Transactional
     public Course saveCourse(Course course) throws DataException {
         return repo.create(course);
     }

@@ -1,7 +1,9 @@
 package org.generation.italy.legion.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,8 +21,10 @@ public class Course implements Serializable {
     @NotBlank(message = "il corso deve specificare un titolo")
     private String title;
     private String description;
+    @Size(min = 10, message = "Il programma deve contenere almeno 10 caratteri")
     private String program;
     //@NotBlank(message = "la durata è obbligatoria") da rivedere
+    @DecimalMin(value = "0.25", message = "La durata del corso deve essere almeno di 1/4 d'ora (0.25)")
     private double duration;
     //private static final long serialVersionUID = 1;
     @Column(name = "is_active")

@@ -28,6 +28,16 @@ public class CourseController {
             return "home";
     }
 
+    @GetMapping("/findCourseByTitleLike")
+    public String findCourseByTitleLike(){
+        return "find_course_by_title_like";
+    }
+
+    @GetMapping("/findTeacherWithSkillAndLevel")
+    public String findTeacherCourseByTitleLike(){
+        return "find_course_by_title_like";
+    }
+
     @GetMapping("/showCourseInsertForm")
     public String showForm(Course c){
         return "insert_course";
@@ -73,6 +83,30 @@ public class CourseController {
         }
     }
 
+    @GetMapping("/findCoursesByTitleContains")
+    public String findCoursesByTitleContains(Model m, String part){
+        try {
+            List<Course> courseList = service.findCoursesByTitleContains(part);
+            m.addAttribute("courses", courseList);
+            return "result_by_title_like";
+        } catch (DataException e) {
+            e.printStackTrace();
+            m.addAttribute("error", e.getCause().getMessage());
+            return "error";
+        }
+    }
 
+//    @GetMapping("/findCoursesByTitleContains")
+//    public String findCourse(Model m, String part){
+//        try {
+//            List<Course> courseList = service.;
+//            m.addAttribute("courses", courseList);
+//            return "result_by_title_like";
+//        } catch (DataException e) {
+//            e.printStackTrace();
+//            m.addAttribute("error", e.getCause().getMessage());
+//            return "error";
+//        }
+//    }
 
 }
