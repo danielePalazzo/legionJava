@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista insegnanti per skill e livello</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="t : ${teacher}">
+                <td th:text="t : ${t.id}"><a href="localhost:8080/findByID">id</a></td>
+                <td th:text="t : ${t.firstname}">nome</td>
+                <td th:text="t : ${t.lastname}">cognome</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -5,9 +5,13 @@ import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Level;
 import org.generation.italy.legion.model.entities.Teacher;
 import org.hibernate.Session;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import static org.generation.italy.legion.model.data.HibernateConstants.*;
 
+@Repository
+@Profile("hibernate")
 public class HibernateTeacherRepository extends GenericCrudRepository<Teacher> implements TeacherRepository {
 
     public HibernateTeacherRepository(Session session) {

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StandardDidacticServiceTest {
     private CourseRepository repo;
-    private StandardDidacticService service;
+    private StandardCourseDidacticService service;
     private Course c1;
     private Course c2;
     private Course c3;

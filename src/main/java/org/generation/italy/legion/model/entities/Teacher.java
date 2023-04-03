@@ -53,5 +53,4 @@ public class Teacher extends Person implements WithId{
     public Level getLevel() {
         return level;
     }
-
 }

@@ -3,7 +3,7 @@ package org.generation.italy.legion.controllers;
 import jakarta.validation.Valid;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCourseDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +15,10 @@ import java.util.Optional;
 
 @Controller
 public class CourseController {
-    private AbstractDidacticService service;
+    private AbstractCourseDidacticService service;
 
     @Autowired
-    public CourseController(AbstractDidacticService service) {
+    public CourseController(AbstractCourseDidacticService service) {
         this.service = service;
         System.out.println(this.service.getClass().getName());
     }
@@ -42,10 +42,11 @@ public class CourseController {
     public String showForm(Course c){
         return "insert_course";
     }
+
     @GetMapping("/index")
     public String showCourses(Model m){  // Model è un oggetto che trasferisce dati tra il Controller e la View
         try {
-            List<Course> courseList = service.findAllCourses();
+            List<Course> courseList = service.findAll();
             m.addAttribute("courses", courseList);
             return "courses";
         } catch (DataException e) {
@@ -57,7 +58,7 @@ public class CourseController {
     @GetMapping("/findCourseById")
     public String findById(Model m, long courseId){
         try {
-            Optional<Course> c = service.findCourseById(courseId);
+            Optional<Course> c = service.findById(courseId);
             Course found = c.orElse(new Course());
             m.addAttribute("course", found);
             return "course_detail";
@@ -74,7 +75,7 @@ public class CourseController {
             return "insert_course";
         }
         try {
-            service.saveCourse(c);
+            service.create(c);
             return "home";
         } catch (DataException e) {
             e.printStackTrace();
