@@ -57,6 +57,34 @@ public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
                    group by m.teacher
                    having count (*) = :n)
        """;
+
+    public static final String HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE_AND_MIN_EDITION = """
+                     SELECT c
+                     FROM Course c
+                     JOIN c.editions ce
+                     WHERE c.title LIKE :part AND c.active = :status
+                     GROUP BY(c.id)
+                     HAVING COUNT(ce.id) >= :minEditions
+            """;
+
+    public static final String HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE = """
+                     FROM Course c
+                     WHERE c.title LIKE :part AND c.active = :status
+            """;
+    public static final String HQL_FIND_COURSE_BY_TITLE_LIKE_AND_MIN_EDITION = """
+                     SELECT c
+                     FROM Course c
+                     JOIN c.editions ce
+                     WHERE c.title LIKE :part
+                     GROUP BY(c.id)
+                     HAVING COUNT(ce.id) >= :minEditions
+            """;
+    public static final String HQL_FIND_COURSE_BY_TITLE_LIKE= """
+                     FROM Course c
+                     WHERE c.title LIKE :part
+            """;
+
+
 }
 
 

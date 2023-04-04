@@ -10,6 +10,9 @@ public interface CourseRepository extends AbstractCrudRepository<Course>{
     int countActiveCourses() throws DataException;
     void deactivateOldest(int n) throws DataException;
     boolean adjustActiveCourses(int NumActive) throws DataException;
+    Iterable<Course> findByTitleAndIsActiveAndMinEdition(String part,boolean status,int minEditions) throws DataException;
+    Iterable<Course> findByTitleAndIsActive(String part,boolean status) throws DataException;
+    Iterable<Course> findByTitleAndMinEdition(String part,int minEditions) throws DataException;
 
 }
 
