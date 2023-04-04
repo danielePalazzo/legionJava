@@ -154,6 +154,11 @@ public class SerializedCourseRepository implements CourseRepository {
         return false;
     }
 
+    @Override
+    public Iterable<Course> findByTitleAndIsActiveAndMinEditions(String part, boolean status, int minEditions) throws DataException {
+        return null;
+    }
+
     private List<Course> load() throws IOException, ClassNotFoundException {
         File f = new File(filename);
         if (!f.exists()) {

@@ -49,19 +49,19 @@ public class HibernateConstants {
 //						FROM edition_module
 //                        GROUP BY id_teacher
 //                        HAVING COUNT (*) = 3)
-public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
-       from Teacher t
-       where t in (
-                   select m.teacher
-                   from EditionModule m
-                   group by m.teacher
-                   having count (*) = :n)
-       """;
+    public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
+           from Teacher t
+           where t in (
+                       select m.teacher
+                       from EditionModule m
+                       group by m.teacher
+                       having count (*) = :n)
+           """;
+
+    public static final String HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE_AND_MIN_EDITION = """
+            from Course c join c.editions ce
+            where c.title like :part and c.is_active = :status
+            group by(c.id)
+            having count(ce.id) >= :min_edition
+            """;
 }
-
-
-
-
-
-
-

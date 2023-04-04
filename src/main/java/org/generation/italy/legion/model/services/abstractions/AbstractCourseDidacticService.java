@@ -8,7 +8,6 @@ import java.util.List;
 public interface AbstractCourseDidacticService extends AbstractCrudDidacticService<Course>{
 
     List<Course> findCoursesByTitleContains(String part) throws DataException;
-
-    boolean adjustActiveCourses(int numActive) throws DataException; //se corsi attivi > numActive disattiva i più vecchi
-
+    boolean adjustActiveCourses(int numActive) throws DataException;
+    Iterable<Course> findByTitleAndIsActiveAndMinEditions(String part, boolean status, int minEditions) throws DataException;
 }

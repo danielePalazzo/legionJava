@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static org.generation.italy.legion.model.data.HibernateConstants.HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE_AND_MIN_EDITION;
 import static org.generation.italy.legion.model.data.HibernateConstants.HQL_OLDEST_N_COURSES;
 
 @Repository
@@ -47,11 +48,6 @@ public class HibernateCourseRepository extends GenericCrudRepository<Course> imp
 //        Course c = session.getReference(Course.class,id);
 //        session.remove(c);
 //    }
-//
-//
-//
-//
-//
 //    public HibernateCourseRepository(Session s){
 //        super(s, Course.class);
 //    }
@@ -86,6 +82,14 @@ public class HibernateCourseRepository extends GenericCrudRepository<Course> imp
     public List<Course> findByTitleContains(String part) throws DataException {
         Query<Course> q = session.createQuery("from Course where title like :p", Course.class);
         q.setParameter("p", "%" + part + "%");
+        return q.list();
+    }
+
+    public Iterable<Course> findByTitleAndIsActiveAndMinEditions(String part, boolean status, int minEditions) throws DataException{
+        Query<Course> q = session.createQuery(HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE_AND_MIN_EDITION, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("status", status);
+        q.setParameter("min_edition", minEditions);
         return q.list();
     }
 }
