@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static org.generation.italy.legion.model.data.HibernateConstants.HQL_OLDEST_N_COURSES;
+import static org.generation.italy.legion.model.data.HibernateConstants.*;
 
 @Repository
 @Profile("hibernate")
@@ -82,6 +83,32 @@ public class HibernateCourseRepository extends GenericCrudRepository<Course> imp
     public boolean adjustActiveCourses(int NumActive) throws DataException {
         return false;
     }
+
+    @Override
+    public Iterable<Course> findByTitleAndIsActiveAndMinEdition(String part, boolean status, int minEditions) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE_AND_MIN_EDITION, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("status", status);
+        q.setParameter("minEditions", minEditions);
+        return q.list();
+    }
+
+    @Override
+    public Iterable<Course> findByTitleAndIsActive(String part, boolean status) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_COURSE_ACTIVE_BY_TITLE_LIKE, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("status", status);
+        return q.list();
+    }
+
+    @Override
+    public Iterable<Course> findByTitleAndMinEdition(String part, int minEditions) throws DataException {
+        Query<Course> q = session.createQuery(HQL_FIND_COURSE_BY_TITLE_LIKE_AND_MIN_EDITION, Course.class);
+        q.setParameter("part", "%" + part + "%");
+        q.setParameter("minEditions", minEditions);
+        return q.list();
+    }
+
     @Override
     public List<Course> findByTitleContains(String part) throws DataException {
         Query<Course> q = session.createQuery("from Course where title like :p", Course.class);
