@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -139,5 +140,9 @@ public abstract class Person {
 
     public void setCompetences(Set<Competence> competences) {
         this.competences = competences;
+    }
+
+    public Optional<Competence> getCompetenceForSkill(long idSkill){
+        return competences.stream().filter(c -> c.getSkill().getId() == idSkill).findFirst();
     }
 }

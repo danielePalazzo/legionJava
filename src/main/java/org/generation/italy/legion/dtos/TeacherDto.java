@@ -26,4 +26,44 @@ public class TeacherDto extends PersonDto{
                 t.getCellNumber(), t.getUsername(), t.getPassword(), t.getpIVA(), t.isEmployee(), t.getHireDate().toString(),
                 t.getFireDate().toString(), t.getLevel());
     }
+
+    public String getpIVA() {
+        return pIVA;
+    }
+
+    public void setpIVA(String pIVA) {
+        this.pIVA = pIVA;
+    }
+
+    public boolean isEmployee() {
+        return isEmployee;
+    }
+
+    public void setEmployee(boolean employee) {
+        isEmployee = employee;
+    }
+
+    public String getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(String hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getFireDate() {
+        return fireDate;
+    }
+
+    public void setFireDate(String fireDate) {
+        this.fireDate = fireDate;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 }
