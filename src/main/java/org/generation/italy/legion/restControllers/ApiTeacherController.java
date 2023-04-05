@@ -5,22 +5,20 @@ import org.generation.italy.legion.dtos.TeacherDto;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Level;
 import org.generation.italy.legion.model.entities.Teacher;
-import org.generation.italy.legion.model.services.abstractions.AbstractTeacherDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping(value = "api/teachers") //davanti al prefisso dei metodi avremo "api"
 public class ApiTeacherController {
-    private AbstractTeacherDidacticService service;
+    private AbstractDidacticService service;
 
     @Autowired
-    public ApiTeacherController(AbstractTeacherDidacticService service){
+    public ApiTeacherController(AbstractDidacticService service){
         this.service = service;
     }
 
@@ -39,7 +37,8 @@ public class ApiTeacherController {
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<SimpleTeacherDto>> findWithSkillAndLevel(@RequestParam(required = false) Long skillId, @RequestParam(required = false) Level level){
+    public ResponseEntity<Iterable<SimpleTeacherDto>> findWithSkillAndLevel(@RequestParam(required = false) Long skillId,
+                                                                            @RequestParam(required = false) Level level){
         try {
             Iterable<Teacher> teacherIt = service.findWithSkillAndLevel(skillId, level);
             return ResponseEntity.ok().body(SimpleTeacherDto.fromEntityIterator(teacherIt, skillId));

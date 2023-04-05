@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StandardDidacticServiceTest {
+public class StandardTeacherDidacticServiceTest {
     private CourseRepository repo;
     private StandardCourseDidacticService service;
     private Course c1;

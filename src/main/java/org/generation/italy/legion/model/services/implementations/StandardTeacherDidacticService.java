@@ -1,19 +1,20 @@
 package org.generation.italy.legion.model.services.implementations;
 
+import org.generation.italy.legion.model.data.abstractions.CourseEditionRepository;
 import org.generation.italy.legion.model.data.abstractions.TeacherRepository;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.data.exceptions.EntityNotFoundException;
 import org.generation.italy.legion.model.entities.Level;
 import org.generation.italy.legion.model.entities.Teacher;
 import org.generation.italy.legion.model.services.abstractions.AbstractCrudDidacticService;
-import org.generation.italy.legion.model.services.abstractions.AbstractTeacherDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class StandardTeacherDidacticService implements AbstractCrudDidacticService<Teacher>, AbstractTeacherDidacticService {
+public class StandardTeacherDidacticService implements AbstractCrudDidacticService<Teacher>, AbstractDidacticService {
     private TeacherRepository repo;
 
     @Autowired

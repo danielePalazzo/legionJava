@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+
 public class CourseController {
     private AbstractCourseDidacticService service;
 
@@ -42,7 +42,7 @@ public class CourseController {
     public String showForm(Course c){
         return "insert_course";
     }
-
+/*
     @GetMapping("/index")
     public String showCourses(Model m){  // Model è un oggetto che trasferisce dati tra il Controller e la View
         try {
@@ -54,7 +54,7 @@ public class CourseController {
             m.addAttribute("error", e.getCause().getMessage());
             return "error";
         }
-    }
+    }*/
     @GetMapping("/findCourseById")
     public String findById(Model m, long courseId){
         try {

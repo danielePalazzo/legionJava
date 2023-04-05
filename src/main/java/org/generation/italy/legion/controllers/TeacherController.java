@@ -1,23 +1,21 @@
 package org.generation.italy.legion.controllers;
 
 import org.generation.italy.legion.model.data.exceptions.DataException;
-import org.generation.italy.legion.model.entities.Course;
 import org.generation.italy.legion.model.entities.Level;
 import org.generation.italy.legion.model.entities.Teacher;
-import org.generation.italy.legion.model.services.abstractions.AbstractTeacherDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
-@Controller
+
 public class TeacherController {
-    private AbstractTeacherDidacticService service;
+    private AbstractDidacticService service;
 
     @Autowired
-    public TeacherController(AbstractTeacherDidacticService service){
+    public TeacherController(AbstractDidacticService service){
         this.service = service;
     }
 
