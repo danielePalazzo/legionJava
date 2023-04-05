@@ -44,19 +44,18 @@ public class ApiCourseController {
                                                                      @RequestParam(required = false) Boolean isActive,
                                                                      @RequestParam(required = false) Integer minEdition){
         try{
+            Iterable<Course> itCourse;
             if (isActive == null && minEdition == null){
-            Iterable<Course> itCourse = service.findCoursesByTitleContains(titleLike);
-            return ResponseEntity.ok().body(CourseDto.fromEntityIterable(itCourse));
+                itCourse = service.findCoursesByTitleContains(titleLike);
+            } else if(minEdition == null){
+                itCourse = service.findByTitleAndIsActive(titleLike, isActive);
+            }else if(isActive == null){
+                itCourse = service.findByTitleAndMinEdition(titleLike, minEdition);
+            }else if(titleLike != null){
+                itCourse = service.findByTitleAndIsActiveAndMinEdition(titleLike, isActive, minEdition);
+            }else {
+                return ResponseEntity.badRequest().build();
             }
-            if (minEdition == null){
-                Iterable<Course> itCourse = service.findByTitleAndIsActive(titleLike, isActive);
-                return ResponseEntity.ok().body(CourseDto.fromEntityIterable(itCourse));
-            }
-            if (isActive == null){
-                Iterable<Course> itCourse = service.findByTitleAndMinEdition(titleLike, minEdition);
-                return ResponseEntity.ok().body(CourseDto.fromEntityIterable(itCourse));
-            }
-            Iterable<Course> itCourse = service.findByTitleAndIsActiveAndMinEdition(titleLike, isActive, minEdition);
             return ResponseEntity.ok().body(CourseDto.fromEntityIterable(itCourse));
         } catch (DataException e) {
             e.printStackTrace();
