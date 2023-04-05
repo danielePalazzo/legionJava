@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-@Repository
-@Profile("hibernate")
 public class HibernateCourseEditionRepository extends GenericCrudRepository<CourseEdition> {
     public HibernateCourseEditionRepository(EntityManager em){
         super(em, CourseEdition.class);

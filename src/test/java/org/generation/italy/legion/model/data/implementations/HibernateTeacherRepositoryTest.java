@@ -74,7 +74,7 @@ class HibernateTeacherRepositoryTest {
     void findWithCompetenceByLevel() {
         try {
             session.clear();
-            Iterable<Teacher> it = repo.findWithCompetenceByLevel(Level.ADVANCED);
+            Iterable<Teacher> it = repo.findByLevel(Level.ADVANCED);
             List<Teacher> tc = new ArrayList<>();
             it.forEach(tc::add);
             assertEquals(1, tc.size());
