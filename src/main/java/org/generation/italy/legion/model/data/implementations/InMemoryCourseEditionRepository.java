@@ -8,36 +8,30 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class InMemoryCourseEditionRepository implements CourseEditionRepository {
+public class InMemoryCourseEditionRepository{
 
     private static Map<Long, CourseEdition> data = new HashMap<>();
 
-    @Override
     public double getTotalCost() {
         return data.values().stream().mapToDouble(CourseEdition :: getCost).sum();
     }
 
-    @Override
     public Optional<CourseEdition> findMostExpensive() {
         return data.values().stream().max(Comparator.comparingDouble(CourseEdition :: getCost));
     }
 
-    @Override
     public double findAverageCost() {
         return getTotalCost() / data.size();
     }
 
-    @Override
     public Iterable<Double> findAllDuration() {
         return data.values().stream().map(e -> e.getCourse().getDuration()).toList();
     }
 
-    @Override
     public Iterable<CourseEdition> findByCourse(long courseId) {
         return data.values().stream().filter(e -> e.getId()==courseId).toList();
     }
 
-    @Override
     public Iterable<CourseEdition> findByCourseTitleAndPeriod(String titlePart,
                                                               LocalDate startAt, LocalDate endAt){
         return data.values().stream().filter(e -> e.getCourse().getTitle().contains(titlePart)
@@ -46,7 +40,6 @@ public class InMemoryCourseEditionRepository implements CourseEditionRepository 
                                              && e.getStartedAt().isBefore(endAt)).toList();*/
     }
 
-    @Override
     public Iterable<CourseEdition> findMedian() {
         List <CourseEdition> medianPrice = new ArrayList<>();
         var result = data.values().stream().sorted(Comparator.comparingDouble(CourseEdition :: getCost)).toList();
@@ -60,7 +53,6 @@ public class InMemoryCourseEditionRepository implements CourseEditionRepository 
         }
     }
 
-    @Override
     public Optional<Double> getCourseEditionCostMode() {
         /*Stream<Course> cs = data.values().stream().filter(e->e.getCost()>1000).map(e->e.getCourse()).distinct();
         List<Course> ls =cs.toList();

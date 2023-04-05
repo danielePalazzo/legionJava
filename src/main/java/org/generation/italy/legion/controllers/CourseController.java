@@ -46,7 +46,7 @@ public class CourseController {
     @GetMapping("/index")
     public String showCourses(Model m){  // Model è un oggetto che trasferisce dati tra il Controller e la View
         try {
-            List<Course> courseList = service.findAll();
+            Iterable<Course> courseList = service.findAll();
             m.addAttribute("courses", courseList);
             return "courses";
         } catch (DataException e) {

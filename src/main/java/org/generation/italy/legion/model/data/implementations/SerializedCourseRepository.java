@@ -32,7 +32,7 @@ public class SerializedCourseRepository implements CourseRepository {
         try {
             return load();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DataException("Errore nel findByTitleContains", e);
+            throw new DataException("Errore nel findAll", e);
         }
     }
 
@@ -49,7 +49,7 @@ public class SerializedCourseRepository implements CourseRepository {
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new DataException("Errore nel create course", e);
+            throw new DataException("Errore nel findById", e);
         }
     }
 

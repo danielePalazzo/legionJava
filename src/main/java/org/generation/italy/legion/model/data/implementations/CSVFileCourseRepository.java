@@ -16,8 +16,6 @@ import java.util.*;
 import static org.generation.italy.legion.model.data.Constants.CSV_COURSE;
 import static org.generation.italy.legion.model.data.Constants.ENTITY_NOT_FOUND;
 
-
-
 @Repository
 @Profile("csv")
 public class CSVFileCourseRepository implements CourseRepository {

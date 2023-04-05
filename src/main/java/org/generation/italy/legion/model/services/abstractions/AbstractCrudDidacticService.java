@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AbstractCrudDidacticService<T>{
-    List<T> findAll() throws DataException;
+    Iterable<T> findAll() throws DataException;
     Optional<T> findById(long id) throws DataException;
     T create(T entity) throws DataException;
     void update(T entity) throws EntityNotFoundException, DataException;

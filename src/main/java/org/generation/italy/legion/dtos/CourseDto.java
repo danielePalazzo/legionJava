@@ -81,4 +81,9 @@ public class CourseDto {
                 .map(s -> CourseDto.fromEntity(s)).toList();
     }
 
+    public static List<CourseDto> fromEntityList(List<Course> c){
+        return StreamSupport.stream(c.spliterator(), false)
+                .map(s -> CourseDto.fromEntity(s)).toList();
+    }
+
 }
