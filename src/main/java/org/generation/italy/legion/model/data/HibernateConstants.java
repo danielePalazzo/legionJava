@@ -2,6 +2,8 @@ package org.generation.italy.legion.model.data;
 
 public class HibernateConstants {
 
+    public static final String HQL_FIND_COURSE_BY_TITLE_LIKE = "from Course where title like :p";
+
     public static final String HQL_DEACTIVATE_OLDEST_N_COURSES = """
                update Course c set c.isActive=false where c in (
                select co from Course co where co.isActive = true
