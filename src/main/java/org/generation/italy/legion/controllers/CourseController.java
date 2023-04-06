@@ -1,10 +1,11 @@
 package org.generation.italy.legion.controllers;
 
 import jakarta.validation.Valid;
+import org.generation.italy.legion.model.data.abstractions.GenericRepository;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.services.abstractions.AbstractCourseService;
-import org.generation.italy.legion.model.services.abstractions.AbstractCrudService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCurriculumService;
+import org.generation.italy.legion.model.services.implementations.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,13 +16,14 @@ import java.util.Optional;
 
 
 public class CourseController {
-    private AbstractCourseService service;
-    private AbstractCrudService<Course> crudService;
+    private AbstractCurriculumService service;
+    private GenericService<Course> crudService;
 
     @Autowired
-    public CourseController(AbstractCourseService service, AbstractCrudService<Course> crudService) {
+    public CourseController(AbstractCurriculumService service,
+                            GenericRepository<Course> courseRepo) {
         this.service = service;
-        this.crudService = crudService;
+        this.crudService = new GenericService<>(courseRepo);
     }
 
     @GetMapping("/home")

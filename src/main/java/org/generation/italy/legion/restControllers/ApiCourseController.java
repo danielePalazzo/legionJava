@@ -1,11 +1,11 @@
 package org.generation.italy.legion.restControllers;
 
 import org.generation.italy.legion.dtos.CourseDto;
+import org.generation.italy.legion.model.data.abstractions.GenericRepository;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.services.abstractions.AbstractCourseService;
-import org.generation.italy.legion.model.services.abstractions.AbstractCrudService;
-import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCurriculumService;
+import org.generation.italy.legion.model.services.implementations.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,14 @@ import java.util.Optional;
 @RequestMapping(value = "api/courses")
 public class ApiCourseController {
 
-    private AbstractDidacticService courseService;
-    private AbstractCrudService<Course> crudService;
+    private AbstractCurriculumService courseService;
+    private GenericService<Course> crudService;
 
     @Autowired
-    public ApiCourseController(AbstractDidacticService courseService, AbstractCrudService<Course> crudService) {
+    public ApiCourseController(AbstractCurriculumService courseService,
+                               GenericRepository<Course> courseRepo) {
         this.courseService = courseService;
-        this.crudService = crudService;
+        this.crudService = new GenericService<>(courseRepo);
     }
 
     @GetMapping("/{id}")

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StandardTeacherDidacticServiceTest {
     private CourseRepository repo;
-    private StandardDidacticService service;
+    private StandardCurriculumService service;
     private Course c1;
     private Course c2;
     private Course c3;
@@ -26,14 +26,12 @@ public class StandardTeacherDidacticServiceTest {
         c2 = new Course(2, "Title2", "Description2", "Program2", 201,true, LocalDate.of(2023,02,18));
         c3 = new Course(3, "Title3", "Description3", "Program3", 202,true, LocalDate.of(2023,02,16));
         c4 = new Course(4, "Title4", "Description4", "Program4", 203,true, LocalDate.of(2023,02,19));
-        try {
-            repo.create(c1);
-            repo.create(c2);
-            repo.create(c3);
-            repo.create(c4);
-        } catch (DataException e) {
-            fail("Errore nell'inserimento corsi del setup: " + e.getMessage());
-        }
+
+        repo.save(c1);
+        repo.save(c2);
+        repo.save(c3);
+        repo.save(c4);
+
     }
 
     @AfterEach

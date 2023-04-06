@@ -2,10 +2,12 @@ package org.generation.italy.legion.model.data.abstractions;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.generation.italy.legion.model.entities.CourseEdition;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.generation.italy.legion.model.data.HibernateConstants.*;

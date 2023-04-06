@@ -2,14 +2,10 @@ package org.generation.italy.legion.model.services.implementations;
 
 import org.generation.italy.legion.model.data.abstractions.CourseEditionRepository;
 import org.generation.italy.legion.model.data.abstractions.CourseRepository;
-import org.generation.italy.legion.model.data.abstractions.TeacherRepository;
 import org.generation.italy.legion.model.data.exceptions.DataException;
-import org.generation.italy.legion.model.data.exceptions.EntityNotFoundException;
 import org.generation.italy.legion.model.entities.Course;
 import org.generation.italy.legion.model.entities.CourseEdition;
-import org.generation.italy.legion.model.entities.Level;
-import org.generation.italy.legion.model.entities.Teacher;
-import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCurriculumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,24 +14,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StandardDidacticService implements AbstractDidacticService {
-    //@Autowired
-    private CourseRepository courseRepo; // field injection = inietta sul campo
+public class StandardCurriculumService implements AbstractCurriculumService {
+
+    private CourseRepository courseRepo;
     private CourseEditionRepository courseEditionRepo;
-    private TeacherRepository teacherRepo;
 
     @Autowired
-    public StandardDidacticService(CourseRepository courseRepo,
-                                   CourseEditionRepository courseEditionRepo,
-                                   TeacherRepository teacherRepo) {
+    public StandardCurriculumService(CourseRepository courseRepo,
+                                   CourseEditionRepository courseEditionRepo) {
         this.courseRepo = courseRepo;
         this.courseEditionRepo = courseEditionRepo;
-        this.teacherRepo = teacherRepo;
-    }
-
-    //    @Autowired
-    public void setCourseRepo(CourseRepository courseRepo) { // setter injection
-        this.courseRepo = courseRepo;
     }
 
     @Override
@@ -65,7 +53,7 @@ public class StandardDidacticService implements AbstractDidacticService {
 
     @Override
     public Iterable<Course> findByTitleAndIsActive(String part, boolean status) throws DataException {
-        return courseRepo.findByTitleAndIsActive(part,status);
+        return courseRepo.findByTitleContainingAndActiveTrue(part);
     }
 
     @Override
@@ -114,13 +102,4 @@ public class StandardDidacticService implements AbstractDidacticService {
         return courseEditionRepo.getCourseEditionCostMode();
     }
 
-    @Override
-    public Iterable<Teacher> findByLevel(Level teacherLevel) throws DataException {
-        return teacherRepo.findByLevel(teacherLevel);
-    }
-
-    @Override
-    public Iterable<Teacher> findWithSkillAndLevel(long idSkill, Level competenceLevel) throws DataException {
-        return teacherRepo.findWithSkillAndLevel(idSkill, competenceLevel);
-    }
 }

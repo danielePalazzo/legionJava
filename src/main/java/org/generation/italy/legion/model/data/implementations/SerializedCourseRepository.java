@@ -5,10 +5,16 @@ import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.data.exceptions.EntityNotFoundException;
 import org.generation.italy.legion.model.entities.Course;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Function;
 
 import static org.generation.italy.legion.model.data.Constants.ENTITY_NOT_FOUND;
 
@@ -28,15 +34,68 @@ public class SerializedCourseRepository implements CourseRepository {
     }
 
     @Override
-    public List<Course> findAll() throws DataException {
+    public <S extends Course> S save(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> List<S> saveAll(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public Optional<Course> findById(Long aLong) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public List<Course> findAll(){
         try {
             return load();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DataException("Errore nel findByTitleContains", e);
+            throw new RuntimeException("Errore nel findByTitleContains", e);
         }
     }
 
     @Override
+    public List<Course> findAllById(Iterable<Long> longs) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public void delete(Course entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Long> longs) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Course> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
     public Optional<Course> findById(long id) throws DataException {
         try {
             var courses = load();
@@ -68,8 +127,6 @@ public class SerializedCourseRepository implements CourseRepository {
             throw new DataException("Errore nel findByTitleContains", e);
         }
     }
-
-    @Override
     public Course create(Course course) throws DataException {
         try {
             var courses = load();
@@ -81,8 +138,6 @@ public class SerializedCourseRepository implements CourseRepository {
             throw new DataException("Errore nel create course", e);
         }
     }
-
-    @Override
     public void update(Course course) throws EntityNotFoundException, DataException {
         try {
             var courses = load();
@@ -102,8 +157,6 @@ public class SerializedCourseRepository implements CourseRepository {
             throw new DataException("Errore nel create course", e);
         }
     }
-
-    @Override
     public void deleteById(long id) throws EntityNotFoundException, DataException {
         try {
             var courses = load();
@@ -160,7 +213,7 @@ public class SerializedCourseRepository implements CourseRepository {
     }
 
     @Override
-    public Iterable<Course> findByTitleAndIsActive(String part, boolean status) throws DataException {
+    public Iterable<Course> findByTitleContainingAndActiveTrue(String part) throws DataException {
         return null;
     }
 
@@ -189,4 +242,93 @@ public class SerializedCourseRepository implements CourseRepository {
         }
     }
 
+    @Override
+    public void flush() {
+
+    }
+
+    @Override
+    public <S extends Course> S saveAndFlush(S entity) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> List<S> saveAllAndFlush(Iterable<S> entities) {
+        return null;
+    }
+
+    @Override
+    public void deleteAllInBatch(Iterable<Course> entities) {
+
+    }
+
+    @Override
+    public void deleteAllByIdInBatch(Iterable<Long> longs) {
+
+    }
+
+    @Override
+    public void deleteAllInBatch() {
+
+    }
+
+    @Override
+    public Course getOne(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public Course getById(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public Course getReferenceById(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> Optional<S> findOne(Example<S> example) {
+        return Optional.empty();
+    }
+
+    @Override
+    public <S extends Course> List<S> findAll(Example<S> example) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> List<S> findAll(Example<S> example, Sort sort) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> Page<S> findAll(Example<S> example, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public <S extends Course> long count(Example<S> example) {
+        return 0;
+    }
+
+    @Override
+    public <S extends Course> boolean exists(Example<S> example) {
+        return false;
+    }
+
+    @Override
+    public <S extends Course, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+        return null;
+    }
+
+    @Override
+    public List<Course> findAll(Sort sort) {
+        return null;
+    }
+
+    @Override
+    public Page<Course> findAll(Pageable pageable) {
+        return null;
+    }
 }

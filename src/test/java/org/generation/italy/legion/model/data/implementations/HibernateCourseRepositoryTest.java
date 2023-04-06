@@ -1,5 +1,6 @@
 package org.generation.italy.legion.model.data.implementations;
 
+import org.generation.italy.legion.model.data.abstractions.CourseRepository;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
 import org.hibernate.Session;
@@ -20,7 +21,7 @@ class HibernateCourseRepositoryTest {
     private Course c2;
     private Course c3;
     private Session s;
-    private HibernateCourseRepository repo;
+    private CourseRepository repo;
 
 
     @BeforeEach
@@ -33,7 +34,7 @@ class HibernateCourseRepositoryTest {
         insertCourse(c1, s);
         insertCourse(c2, s);
         insertCourse(c3, s);
-        repo = new HibernateCourseRepository(s);
+        //repo = new HibernateCourseRepository(s);
     }
 
     @AfterEach
@@ -44,15 +45,13 @@ class HibernateCourseRepositoryTest {
 
     @Test
     void findById() {
-        try {
-            Optional<Course> c = repo.findById(c1.getId());
-            assertFalse(c.isEmpty());
-            Course course = c.get();
-            assertEquals(c1.getId(), course.getId());
-            assertEquals(c1.getTitle(), course.getTitle());
-        } catch (DataException e) {
-            fail(e.getMessage());
-        }
+
+        Optional<Course> c = repo.findById(c1.getId());
+        assertFalse(c.isEmpty());
+        Course course = c.get();
+        assertEquals(c1.getId(), course.getId());
+        assertEquals(c1.getTitle(), course.getTitle());
+
 
     }
 

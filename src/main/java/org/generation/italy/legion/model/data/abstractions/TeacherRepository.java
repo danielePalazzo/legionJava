@@ -6,7 +6,7 @@ import org.generation.italy.legion.model.entities.Teacher;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface TeacherRepository extends CrudRepository<Teacher,Long> {
+public interface TeacherRepository extends GenericRepository<Teacher> {
 
     Iterable<Teacher> findByLevel(Level teacherLevel) throws DataException;
 
