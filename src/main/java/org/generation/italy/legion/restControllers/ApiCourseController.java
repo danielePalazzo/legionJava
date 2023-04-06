@@ -1,13 +1,11 @@
 package org.generation.italy.legion.restControllers;
 
 import org.generation.italy.legion.dtos.CourseDto;
-import org.generation.italy.legion.dtos.SimpleTeacherDto;
-import org.generation.italy.legion.dtos.TeacherDto;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.entities.Level;
-import org.generation.italy.legion.model.entities.Teacher;
-import org.generation.italy.legion.model.services.abstractions.AbstractCourseDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCourseService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCrudService;
+import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +16,19 @@ import java.util.Optional;
 @RequestMapping(value = "api/courses")
 public class ApiCourseController {
 
-    private AbstractCourseDidacticService service;
+    private AbstractDidacticService courseService;
+    private AbstractCrudService<Course> crudService;
 
     @Autowired
-    public ApiCourseController(AbstractCourseDidacticService service){
-        this.service = service;
+    public ApiCourseController(AbstractDidacticService courseService, AbstractCrudService<Course> crudService) {
+        this.courseService = courseService;
+        this.crudService = crudService;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CourseDto> findById(@PathVariable long id){
         try {
-            Optional<Course> courseOp = service.findById(id);
+            Optional<Course> courseOp = crudService.findById(id);
             if(courseOp.isPresent()){
                 return ResponseEntity.ok().body(CourseDto.fromEntity(courseOp.get()));
             }
@@ -46,13 +46,13 @@ public class ApiCourseController {
         try{
             Iterable<Course> itCourse;
             if (isActive == null && minEdition == null){
-                itCourse = service.findCoursesByTitleContains(titleLike);
+                itCourse = courseService.findCoursesByTitleContains(titleLike);
             } else if(minEdition == null){
-                itCourse = service.findByTitleAndIsActive(titleLike, isActive);
+                itCourse = courseService.findByTitleAndIsActive(titleLike, isActive);
             }else if(isActive == null){
-                itCourse = service.findByTitleAndMinEdition(titleLike, minEdition);
+                itCourse = courseService.findByTitleAndMinEdition(titleLike, minEdition);
             }else if(titleLike != null){
-                itCourse = service.findByTitleAndIsActiveAndMinEdition(titleLike, isActive, minEdition);
+                itCourse = courseService.findByTitleAndIsActiveAndMinEdition(titleLike, isActive, minEdition);
             }else {
                 return ResponseEntity.badRequest().build();
             }

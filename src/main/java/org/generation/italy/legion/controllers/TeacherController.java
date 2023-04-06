@@ -3,6 +3,7 @@ package org.generation.italy.legion.controllers;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Level;
 import org.generation.italy.legion.model.entities.Teacher;
+import org.generation.italy.legion.model.services.abstractions.AbstractCrudService;
 import org.generation.italy.legion.model.services.abstractions.AbstractDidacticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,10 +14,12 @@ import java.util.Optional;
 
 public class TeacherController {
     private AbstractDidacticService service;
+    private AbstractCrudService<Teacher> crudService;
 
     @Autowired
-    public TeacherController(AbstractDidacticService service){
+    public TeacherController(AbstractDidacticService service, AbstractCrudService<Teacher> crudService) {
         this.service = service;
+        this.crudService = crudService;
     }
 
     @GetMapping("/showTeacherInsertForm")
@@ -40,7 +43,7 @@ public class TeacherController {
     @GetMapping("/findById")
     public String findById(Model m, long id){
         try {
-            Optional<Teacher> teacherOp = service.findById(id);
+            Optional<Teacher> teacherOp = crudService.findById(id);
             teacherOp.orElse(new Teacher());
             m.addAttribute("teacher", teacherOp);
             return "result_find_by_id";

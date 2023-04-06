@@ -5,7 +5,7 @@ import org.generation.italy.legion.model.entities.Course;
 
 import java.util.List;
 
-public interface AbstractCourseDidacticService extends AbstractCrudDidacticService<Course>{
+public interface AbstractCourseService{
 
     List<Course> findCoursesByTitleContains(String part) throws DataException;
     boolean adjustActiveCourses(int numActive) throws DataException; //se corsi attivi > numActive disattiva i più vecchi

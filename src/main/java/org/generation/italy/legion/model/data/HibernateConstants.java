@@ -80,8 +80,23 @@ public static final String HQL_FIND_TEACHERS_BY_COURSE_EDITION = """
                      GROUP BY(c.id)
                      HAVING COUNT(ce.id) >= :minEditions
             """;
+    public static final String HQL_FIND_MODE_COURSE_EDITION_COST = """
+                    select ce.cost
+                    form CourseEdition ce
+                    group by ce.cost
+                    order by count(ce.id) desc
+            """;
 
+    public static final String HQL_COUNT_COURSE_EDITION = """
+                    select count(ce.id)
+                    form CourseEdition ce
+            """;
 
+    public static final String HQL_COURSE_EDITION_LIST_ASC = """
+                    select ce
+                    form CourseEdition ce
+                    order by ce.cost
+            """;
 }
 
 

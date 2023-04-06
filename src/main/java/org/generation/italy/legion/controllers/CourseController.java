@@ -3,9 +3,9 @@ package org.generation.italy.legion.controllers;
 import jakarta.validation.Valid;
 import org.generation.italy.legion.model.data.exceptions.DataException;
 import org.generation.italy.legion.model.entities.Course;
-import org.generation.italy.legion.model.services.abstractions.AbstractCourseDidacticService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCourseService;
+import org.generation.italy.legion.model.services.abstractions.AbstractCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +15,13 @@ import java.util.Optional;
 
 
 public class CourseController {
-    private AbstractCourseDidacticService service;
+    private AbstractCourseService service;
+    private AbstractCrudService<Course> crudService;
 
     @Autowired
-    public CourseController(AbstractCourseDidacticService service) {
+    public CourseController(AbstractCourseService service, AbstractCrudService<Course> crudService) {
         this.service = service;
-        System.out.println(this.service.getClass().getName());
+        this.crudService = crudService;
     }
 
     @GetMapping("/home")
@@ -58,7 +59,7 @@ public class CourseController {
     @GetMapping("/findCourseById")
     public String findById(Model m, long courseId){
         try {
-            Optional<Course> c = service.findById(courseId);
+            Optional<Course> c = crudService.findById(courseId);
             Course found = c.orElse(new Course());
             m.addAttribute("course", found);
             return "course_detail";
@@ -75,7 +76,7 @@ public class CourseController {
             return "insert_course";
         }
         try {
-            service.create(c);
+            crudService.create(c);
             return "home";
         } catch (DataException e) {
             e.printStackTrace();
