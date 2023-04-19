@@ -18,7 +18,7 @@ public class GenericService<T> {
         return repo.findAll();
     }
 
-    public Optional<T> findById(long id) throws DataException {
+    public Optional<T> findById(long id){
         return repo.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class GenericService<T> {
     }
 
     @Transactional
-    public void deleteById(long id) throws EntityNotFoundException, DataException{
+    public void deleteById(long id) throws EntityNotFoundException, DataException {
         repo.deleteById(id);
     }
 }

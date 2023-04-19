@@ -108,7 +108,7 @@ public class SimpleTeacherDto {
         Competence c = oc.get();
         String skillName = c.getSkill().getName();
         Level level = c.getLevel();
-        return new SimpleTeacherDto(t.getId(), t.getFirstname(), t.getLastname(), t.getSex(), t.getpIVA(), t.getLevel(),
+        return new SimpleTeacherDto(t.getId(), t.getFirstname(), t.getLastname(), t.getSex(), t.getPIVA(), t.getLevel(),
                 skillName, skillId, level);
     }
 

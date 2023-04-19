@@ -103,11 +103,11 @@ class JDBCCourseEditionRepositoryTest {
         int personKey1 = update(INSERT_PERSON_RETURNING_ID, con, true, t1.getFirstname(), t1.getLastname(),
                 t1.getDob(), t1.getSex(), t1.getEmail(), t1.getUsername(), t1.getPassword());
         t1.setId(personKey1);
-        update(INSERT_TEACHER, con, false, personKey1, t1.getpIVA(), t1.isEmployee(), t1.getLevel());
+        update(INSERT_TEACHER, con, false, personKey1, t1.getPIVA(), t1.isEmployee(), t1.getLevel());
         int personKey2 = update(INSERT_PERSON_RETURNING_ID, con, true, t2.getFirstname(), t2.getLastname(),
                 t2.getDob(), t2.getSex(), t2.getEmail(), t2.getUsername(), t2.getPassword());
         t2.setId(personKey2);
-        update(INSERT_TEACHER, con, false, personKey2, t2.getpIVA(), t2.isEmployee(), t2.getLevel());
+        update(INSERT_TEACHER, con, false, personKey2, t2.getPIVA(), t2.isEmployee(), t2.getLevel());
         int competenceKey1 = update(INSERT_COMPETENCE_RETURNING_ID, con, true, t1.getId(), co1.getSkill().getId(), co1.getLevel());
         co1.setId(competenceKey1);
         int competenceKey2 = update(INSERT_COMPETENCE_RETURNING_ID, con, true, t2.getId(), co2.getSkill().getId(), co2.getLevel());

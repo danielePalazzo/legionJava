@@ -44,15 +44,9 @@ public class TeacherController {
 
     @GetMapping("/findById")
     public String findById(Model m, long id){
-        try {
-            Optional<Teacher> teacherOp = crudService.findById(id);
-            teacherOp.orElse(new Teacher());
-            m.addAttribute("teacher", teacherOp);
-            return "result_find_by_id";
-        } catch (DataException e){
-            e.printStackTrace();
-            m.addAttribute("error", e.getCause().getMessage());
-            return "error";
-        }
+        Optional<Teacher> teacherOp = crudService.findById(id);
+        teacherOp.orElse(new Teacher());
+        m.addAttribute("teacher", teacherOp);
+        return "result_find_by_id";
     }
 }

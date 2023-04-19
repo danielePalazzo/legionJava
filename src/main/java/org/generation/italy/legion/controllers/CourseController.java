@@ -60,16 +60,10 @@ public class CourseController {
     }*/
     @GetMapping("/findCourseById")
     public String findById(Model m, long courseId){
-        try {
-            Optional<Course> c = crudService.findById(courseId);
-            Course found = c.orElse(new Course());
-            m.addAttribute("course", found);
-            return "course_detail";
-        } catch (DataException e) {
-            e.printStackTrace();
-            m.addAttribute("error", e.getCause().getMessage());
-            return "error";
-        }
+        Optional<Course> c = crudService.findById(courseId);
+        Course found = c.orElse(new Course());
+        m.addAttribute("course", found);
+        return "course_detail";
     }
 
     @GetMapping("/saveCourse")
